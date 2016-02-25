@@ -1,4 +1,3 @@
-var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -11,18 +10,21 @@ var models = require('./models');
 var passport = require('passport');
 var expressSession = require('express-session');
 
-var routes = require('./routes/index');
+var express = require('express');
 
 var app = express();
+
+var routes = require('./routes/index');
 
 app.use(expressSession({ secret: 'secretKey' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+passport.use(models.User.createStrategy());
+
+passport.serializeUser(models.User.serializeUser());
+passport.deserializeUser(models.User.deserializeUser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
