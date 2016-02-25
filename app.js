@@ -4,12 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// var sequelize = require('config/sequelize-init');
+var flash = require('connect-flash');
+var models = require('./models');
+var passport = require('passport');
+var expressSession = require('express-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 
 var app = express();
+
+app.use(expressSession({ secret: 'secretKey' }));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +33,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function handler404(req, res, next) {
