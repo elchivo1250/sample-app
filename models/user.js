@@ -1,4 +1,4 @@
-module.exports = function createUser(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var User = sequelize.define('User', {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
@@ -9,6 +9,12 @@ module.exports = function createUser(sequelize, DataTypes) {
         User.hasMany(models.UserAnswer);
       }
     }
+  });
+
+  passportLocalSequelize.attachToUser(User, {
+    usernameField: 'username',
+    hashField: 'password',
+    saltField: 'salt'
   });
 
   return User;

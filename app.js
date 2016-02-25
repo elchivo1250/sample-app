@@ -5,7 +5,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+
 var models = require('./models');
+
 var passport = require('passport');
 var expressSession = require('express-session');
 
@@ -17,6 +19,10 @@ app.use(expressSession({ secret: 'secretKey' }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
