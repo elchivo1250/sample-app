@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "sumo_me",
+    "password": "sumo_me_super_secret_password_and_stuff,
+    "database": "sumo_me",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "sumo_me",
+    "password": "sumo_me_super_secret_password_and_stuff,
+    "database": "sumo_me",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "sumo_me",
+    "password": "sumo_me_super_secret_password_and_stuff,
+    "database": "sumo_me",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}
