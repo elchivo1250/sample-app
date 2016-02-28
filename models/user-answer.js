@@ -3,8 +3,8 @@ module.exports = function createUserAnswer(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function associate(models) {
-        UserAnswer.hasOne(models.User);
-        UserAnswer.hasOne(models.Answer);
+        UserAnswer.belongsTo(models.User);
+        UserAnswer.belongsTo(models.Answer);
       }
     }
   });

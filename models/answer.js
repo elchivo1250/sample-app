@@ -5,7 +5,7 @@ module.exports = function createAnswer(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function associate(models) {
-        Answer.hasOne(models.Question);
+        Answer.belongsTo(models.Question);
       }
     }
   });
