@@ -1,7 +1,38 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title= site.title 
+    meta(charset='UTF-8')
+    meta(name='description', content='#{site.description}')
+    meta(name='author', content='#{author.name}')
+    meta(name='contact', content='#{author.email}')
+    link(rel='stylesheet', href='/css/base.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(type='text/javascript', src='/js/base.js')
   body
-    block content
+    block header
+        header.site-header.cool-blue-lightest(role='banner')
+            div.logo
+                a(href='/' title='#{site.title}')
+                    img(src='//dummyimage.com/70x70/000/fff.png', alt='Logo')
+                    h1= site.title
+            div.user-controls
+                if (typeof user !== 'undefined') 
+                    p.welcome #{user.username}
+                ul.usa-button-list.usa-unstyled-list
+                    if (typeof user !== 'undefined' && user.role === 'admin')
+                        li
+                            a.usa-button(href='/admin/survey', title='Manage Survey') Manage Survey
+                        li
+                            a.usa-button(href='/logout', title='Logout') Logout
+                    else if (typeof user !== 'undefined')
+                        li
+                            a.usa-button(href='/logout', title='Logout') Logout
+                    else
+                        li
+                            a.usa-button(href='/login', title='Login') Login
+                        li
+                            a.usa-button(href='/register', title='Register') Register
+
+    div.main-content
+        block content
