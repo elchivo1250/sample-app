@@ -1,0 +1,69 @@
+.cool-blue-lightest {
+    background-color: #dce4ef;
+}
+
+header.site-header {
+    position: fixed;
+    border-bottom: thin #323232 solid;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding-top: 1rem;
+    padding-left: 1rem;
+}
+
+div.logo {
+    float: left;
+    text-align: left;
+    width: auto;
+    margin-bottom: 1rem;
+}
+
+div.logo a {
+    display: block;
+}
+
+div.logo img {
+    float: left;
+    margin-right: .5rem;
+}
+
+div.logo h1 {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #112e51;
+}
+
+header.site-header div.user-controls { 
+    float: right;
+    margin-top: 1rem;
+    margin-right: 1rem;
+}
+
+header.site-header p.welcome {
+    display: inline;
+    margin-right: 3rem;
+}
+
+header.site-header ul.usa-unstyled-list {
+    display: inline;
+}
+
+header.site-header ul.usa-unstyled-list li {
+    display: inline;
+    margin-right: 3rem;
+}
+
+div.main-content {
+    position: absolute;
+    width: 100%;
+    top: 100px;
+    bottom: 0;
+    right: 0;
+    padding-bottom: 0;
+    padding-top: 1rem; 
+    padding-left: 1rem; 
+    z-index: -1;
+}
