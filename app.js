@@ -4,6 +4,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+var requiredir = require('require-dir');
 
 var models = require('./models');
 
@@ -14,9 +15,15 @@ var express = require('express');
 
 var app = express();
 
-var routes = require('./routes/index');
+// var routes = require('./routes/index')(app);
+var routes = requiredir('./routes'); 
 
-app.use(expressSession({ secret: 'secretKey' }));
+app.use(expressSession({ 
+  secret: 'secretKey',
+  resave: false,
+  saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -40,7 +47,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+for (var i in routes) {
+  app.use('/', routes[i]);
+}
+
+app.use(function (req, res, next) {
+  res.locals.isLoggedIn = typeof req.user === 'undefined' ? false : true;
+  next();
+});
 
 // catch 404 and forward to error handler
 app.use(function handler404(req, res, next) {
@@ -75,5 +89,16 @@ app.use(function handlerProdStack(err, req, res) {
   });
 });
 
+/* Globally available template vars */
+app.locals = {
+  site: {
+    title: 'SurveyChicken',
+    description: 'A super-basic survey creation tool whose name I totally didn\'t rip off from SurveyMonkey.'
+  },
+  author: {
+    name: 'Steve Preston',
+    email: 'stephen.ward.preston@gmail.com'
+  } 
+};
 
 module.exports = app;
