@@ -17,9 +17,15 @@ var express = require('express');
 var app = express();
 
 // var routes = require('./routes/index')(app);
-var routes = requiredir('./routes'); 
+var routes = requiredir('./routes');
 
-app.use(expressSession({ 
+// iterator
+var i;
+
+// site description
+var description;
+
+app.use(expressSession({
   secret: 'secretKey',
   resave: false,
   saveUninitialized: true
@@ -48,8 +54,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin/*', acl.canAccessAdmin);
 
-for (var i in routes) {
-  app.use('/', routes[i]);
+for (i in routes) {
+  if (routes.hasOwnProperty(i)) {
+    app.use('/', routes[i]);
+  }
 }
 
 // catch 404 and forward to error handler
@@ -86,15 +94,19 @@ app.use(function handlerProdStack(err, req, res) {
 });
 
 /* Globally available template vars */
+
+description = 'A super-basic survey creation tool ' +
+'whose name I totally didn\'t rip off from SurveyMonkey.';
+
 app.locals = {
   site: {
     title: 'SurveyChicken',
-    description: 'A super-basic survey creation tool whose name I totally didn\'t rip off from SurveyMonkey.'
+    description: description
   },
   author: {
     name: 'Steve Preston',
     email: 'stephen.ward.preston@gmail.com'
-  } 
+  }
 };
 
 module.exports = app;

@@ -20,29 +20,29 @@ router.get('/logout', function (req, res) {
 
 
 router.get('/register', function (req, res) {
-  res.render('register', { 
+  res.render('register', {
     message: req.flash('message'),
     user: req.user
   });
 });
 
-router.post('/register', function (req, res, next) {
-  models.User.register(req.body['username'], req.body['password'], function (err, registeredUser) {
-
-    registeredUser.role = 'user';
-    registeredUser.save(); 
+router.post('/register', function (req, res) {
+  models.User.register(req.body.username, req.body.password, function (err, registeredUser) {
+    var user = registeredUser;
+    user.role = 'user';
+    user.save();
 
     if (err) {
-      console.log(err.class);
       return res.render('register', {
-        message: req.flash('message')
+        message: req.flash(err)
       });
     }
 
-    passport.authenticate('local') (req, res, function () {
+    passport.authenticate('local')(req, res, function () {
       res.redirect('/');
     });
 
+    return null;
   });
 });
 

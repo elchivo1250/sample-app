@@ -1,5 +1,4 @@
 var express = require('express');
-var passport = require('passport');
 var router = express.Router();
 var models = require('../models');
 var acl = require('../acl');
@@ -13,21 +12,24 @@ router.get('/', function (req, res) {
 });
 
 router.get('/survey', acl.isLoggedIn, function (req, res) {
-    
-  var query = 'SELECT DISTINCT Questions.id FROM Questions LEFT JOIN Answers ON Answers.QuestionId = Questions.id WHERE Questions.id NOT IN (SELECT Questions.id FROM Questions LEFT JOIN Answers ON Answers.QuestionId = Questions.id LEFT JOIN UserAnswers ON UserAnswers.AnswerId = Answers.id WHERE UserAnswers.UserId = :userId)';
+  var query = 'SELECT DISTINCT Questions.id FROM Questions LEFT ' +
+    'JOIN Answers ON Answers.QuestionId = Questions.id WHERE ' +
+    'Questions.id NOT IN (SELECT Questions.id FROM Questions LEFT ' +
+    'JOIN Answers ON Answers.QuestionId = Questions.id LEFT JOIN ' +
+    'UserAnswers ON UserAnswers.AnswerId = Answers.id WHERE ' +
+    'UserAnswers.UserId = :userId)';
 
-  db.sequelize.query(query, { 
-    replacements: { 
-      userId: req.user.id 
-    }, 
-    type: db.Sequelize.QueryTypes.SELECT 
+  db.sequelize.query(query, {
+    replacements: {
+      userId: req.user.id
+    },
+    type: db.Sequelize.QueryTypes.SELECT
   }).then(function (questions) {
-
     if (typeof questions === 'undefined' || questions.length === 0) {
-      throw new Error('There are no more questions'); 
+      throw new Error('There are no more questions');
     }
 
-    // Get random question first because if you include: [models.Answer] it wants to get the 
+    // Get random question first because if you include: [models.Answer] it wants to get the
     // ANSWERS in a random order and limit the potential questions to 1. ._.
     // Please tell me there's a better way to do this.
     models.Question.find({
@@ -52,19 +54,19 @@ router.get('/survey', acl.isLoggedIn, function (req, res) {
         });
       }).catch(function (err) {
         res.render('survey', {
-          message: req.flash('message'),
+          message: req.flash(err),
           user: req.user
         });
       });
     }).catch(function (err) {
       res.render('survey', {
-        message: req.flash('message'),
+        message: req.flash(err),
         user: req.user
       });
     });
   }).catch(function (err) {
     res.render('survey', {
-      message: req.flash('message'),
+      message: req.flash(err),
       user: req.user
     });
   });
@@ -73,15 +75,14 @@ router.get('/survey', acl.isLoggedIn, function (req, res) {
 router.post('/survey/answer', function (req, res) {
   models.UserAnswer.build({
     UserId: req.user.id,
-    AnswerId: req.body['answer']
+    AnswerId: req.body.answer
   })
   .save()
   .then(function () {
-    console.log('success');
+    // do a thing if necessary
   })
-  .catch(function (err) {
+  .catch(function () {
     // insert other error handling here
-    console.log('error:' + err);
   });
   res.redirect('/survey');
 });
