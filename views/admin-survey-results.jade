@@ -1,0 +1,15 @@
+extends layout
+
+block append javascripts
+    script(src='//d3js.org/d3.v3.min.js', charset='utf-8')
+    script(src='/js/results.js', charset='utf-8')
+    script.
+        $.getScript('/js/results.js', function(data, status, jqhxr) {
+          var answerData = !{JSON.stringify(answerData).replace(/<\//g, "<\\/")}
+          Sumo.plotAll(answerData);
+        });
+
+block content
+    h2 Survey Results
+    div.results-container
+        

@@ -1,4 +1,10 @@
 extends layout
 
 block content
-    p Welcome to #{site.title}
+    h2 Welcome to #{site.title}
+    p We've got a survey. That's all.
+    if (typeof user !== 'undefined') 
+        div.button_wrapper
+            a(href='/survey', title='Take our survey')
+                button.usa-button-big(type='button') Take our survey
+

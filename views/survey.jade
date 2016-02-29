@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    if (typeof question !== 'undefined')
+        h2= question.text
+        form(action='/survey/answer', method='POST')
+            fieldset.usa-fieldset-inputs
+                legend.usa-sr-only Survey Question ##{question.id}
+                ul.usa-unstyled-list
+                    for answer in answers
+                        li
+                            input(id='answer-' + answer.id, type='radio', name='answer', value=answer.id)
+                            label(for='answer-' + answer.id) #{answer.text}
+
+                button(type='submit') Submit Answer
+    else 
+        h2 Thank you!
+        p You have completed the entire survey.

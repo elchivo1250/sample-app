@@ -1,0 +1,27 @@
+extends layout
+
+block append javascripts
+    script(type='text/javascript', src='/js/admin.js')
+
+block content
+    div.usa-width-one-whole
+        h2 New Question
+        form(action='/admin/question/create', method='post')
+            input(type='text', name='text')
+            input(type='submit', value='Add Question')
+
+        div.usa-accordion
+            ul.questions.usa-unstyled-list
+                for question, index in questions    
+                    li
+                        button.usa-button-outline(href='javascript:void(0);', title='Add Answer', aria-expanded='false' aria-controls='collapsible-' + index ) #{question.text}
+                        div(id='collapsible-' + index, aria-hidden='true', class='usa-accordion-content')
+                            ul.answers.usa-unstyled-list
+                                for answer, index in question.Answers
+                                    li= answer.text
+
+                            form(action='/admin/question/' + question.id + '/answer/create', method='post')
+                                label(for='answer-' + index) Answer
+                                input(id='answer-' + index, type='text', name='text')
+                                input(type='submit', value='Add Answer')
+

@@ -6,10 +6,13 @@ html
     meta(name='description', content='#{site.description}')
     meta(name='author', content='#{author.name}')
     meta(name='contact', content='#{author.email}')
-    link(rel='stylesheet', href='/css/base.css')
-    link(rel='stylesheet', href='/css/style.css')
-    script(type='text/javascript', src='/js/base.js')
-  body
+
+    block stylesheets
+        link(rel='stylesheet', href='/css/base.css')
+        link(rel='stylesheet', href='/css/style.css')
+
+    block headJavascripts
+  body(class=typeof user !== 'undefined' && user.role === 'admin' ? 'logged-in admin' : '') 
     block header
         header.site-header.cool-blue-lightest(role='banner')
             div.logo
@@ -22,7 +25,9 @@ html
                 ul.usa-button-list.usa-unstyled-list
                     if (typeof user !== 'undefined' && user.role === 'admin')
                         li
-                            a.usa-button(href='/admin/survey', title='Manage Survey') Manage Survey
+                            a.usa-button(href='/admin/survey/view', title='View Survey Results') View Results 
+                        li
+                            a.usa-button(href='/admin/survey/manage', title='Manage Survey') Manage Survey
                         li
                             a.usa-button(href='/logout', title='Logout') Logout
                     else if (typeof user !== 'undefined')
@@ -34,5 +39,8 @@ html
                         li
                             a.usa-button(href='/register', title='Register') Register
 
-    div.main-content
+    div.main-content.usa-grid
         block content
+
+    block javascripts
+        script(type='text/javascript', src='/js/base.js')
