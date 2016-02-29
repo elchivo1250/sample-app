@@ -56,14 +56,42 @@ header.site-header ul.usa-unstyled-list li {
     margin-right: 3rem;
 }
 
-div.main-content {
-    position: absolute;
-    width: 100%;
-    top: 100px;
-    bottom: 0;
-    right: 0;
-    padding-bottom: 0;
-    padding-top: 1rem; 
-    padding-left: 1rem; 
-    z-index: -1;
+
+@media (min-width: 1024px) {
+    body.logged-in.admin div.main-content {
+        margin-top: 10rem;
+    }
+    div.main-content {
+        margin-top: 10rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    body.logged-in.admin div.main-content {
+        margin-top: 20rem;
+    }
+
+    div.main-content {
+        margin-top: 10rem;
+    }
+}
+
+@media (min-width: 568px) and (max-width: 1023px) {
+    body.logged-in.admin div.main-content {
+        margin-top: 20rem;
+    }
+
+    div.main-content {
+        margin-top: 10rem;
+    }
+}
+
+@media (max-width: 567px) {
+    body.logged-in.admin div.main-content {
+        margin-top: 32rem;
+    }
+
+    div.main-content {
+        margin-top: 15rem;
+    }
 }
