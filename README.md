@@ -34,3 +34,4 @@ I used the airbnb-legacy ruleset for eslint when linting my JS. There are a few 
 
 1. Routing files have an error because of express.Router() being an uppercase function.
 1. public/js/results.js has a few errors related to undefined d3 / $ variables
+1. gulpfile.js has a few errors related to the anonymous functions in the list creation section, as well as 1 from an 'unused variable' that is indirectly being used to construct a promise.
