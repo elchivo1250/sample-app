@@ -1,8 +1,8 @@
 var paths = {
     scripts: {
         base: [
-            'node_modules/uswds/assets/js/components.js',
             'node_modules/uswds/assets/js/vendor/*.js',
+            'node_modules/uswds/assets/js/components.js'
         ]
     },
     styles: {
