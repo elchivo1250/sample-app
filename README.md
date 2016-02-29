@@ -3,9 +3,15 @@
 * clone the repository using
 
     git clone git@github.com:elchivo1250/sumoMe.git
+
+    or 
+
     git clone https://github.com/elchivo1250/sumoMe.git 
 
+* make sure you're running node 0.10.x
 * npm install
+* npm install -g gulp
+* gulp
 * create mysql database and user if applicable
 * copy config/config.json.dist to config/config.json
 * enter mysql connection credentials in config/config.json
