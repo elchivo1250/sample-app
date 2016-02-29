@@ -26,6 +26,8 @@ enter mysql connection credentials in config/config.json
 
 Import the database dump in data/sumo_me.sql (I was going to use seeders, but felt it would be faster to simply make a db dump) into your database
 
+Run npm start
+
 #### Notes
 
 I did not create update/destruction functionality. If you would like to see it implemented, let me know, and I'll put it together. 
