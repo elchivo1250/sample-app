@@ -18,10 +18,10 @@ block content
                         div(id='collapsible-' + index, aria-hidden='true', class='usa-accordion-content')
                             ul.answers.usa-unstyled-list
                                 for answer, index in question.Answers
-                                    li= answer.text
+                                    li #{index}. #{answer.text}
 
                             form(action='/admin/question/' + question.id + '/answer/create', method='post')
-                                label(for='answer-' + index) Answer
+                                label(for='answer-' + index) New Answer
                                 input(id='answer-' + index, type='text', name='text')
                                 input(type='submit', value='Add Answer')
 

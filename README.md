@@ -10,6 +10,7 @@
 
 * make sure you're running node 0.10.x
 * npm install
+* cd node_modules/uswds && npm run-script build-sass && cd ../..
 * npm install -g gulp
 * gulp
 * create mysql database and user if applicable
