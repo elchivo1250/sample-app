@@ -1,4 +1,4 @@
-module.exports = function createUserAnswer(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var UserAnswer = sequelize.define('UserAnswer', {
   }, {
     classMethods: {
