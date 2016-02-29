@@ -1,8 +1,8 @@
 # SumoMe
 
 * clone the repository using
-> git clone git@github.com:elchivo1250/sumoMe.git
-> git clone https://github.com/elchivo1250/sumoMe.git 
+    git clone git@github.com:elchivo1250/sumoMe.git
+    git clone https://github.com/elchivo1250/sumoMe.git 
 * npm install
 * create mysql database and user if applicable
 * copy config/config.json.dist to config/config.json
