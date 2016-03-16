@@ -27,13 +27,3 @@ enter mysql connection credentials in config/config.json
 Import the database dump in data/database_dump.sql (I was going to use seeders, but felt it would be faster to simply make a db dump) into your database
 
 Run npm start
-
-#### Notes
-
-I did not create update/destruction functionality. If you would like to see it implemented, let me know, and I'll put it together. 
-
-I used the airbnb-legacy ruleset for eslint when linting my JS. There are a few errors:
-
-1. Routing files have an error because of express.Router() being an uppercase function.
-1. public/js/results.js has a few errors related to undefined d3 / $ variables
-1. gulpfile.js has a few errors related to the anonymous functions in the list creation section, as well as 1 from an 'unused variable' that is indirectly being used to construct a promise.
