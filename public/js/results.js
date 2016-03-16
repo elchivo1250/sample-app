@@ -1,6 +1,6 @@
-var Sumo = function () {};
+var SurveyResults = function () {};
 
-Sumo.prepareData = function (answerData) {
+SurveyResults.prepareData = function (answerData) {
   var data = {};
   var key;
   var questionKey;
@@ -29,7 +29,7 @@ Sumo.prepareData = function (answerData) {
   return data;
 };
 
-Sumo.plot = function (questionId, answerData) {
+SurveyResults.plot = function (questionId, answerData) {
   var data = [];
   var width = 300;
   var height = 300;
@@ -112,24 +112,24 @@ Sumo.plot = function (questionId, answerData) {
     var dataObj = d;
     dataObj.outerRadius = radius;
     dataObj.innerRadius = radius / 2;
-    return 'translate(' + arc.centroid(dataObj) + ')rotate(' + Sumo.angle(dataObj) + ')';
+    return 'translate(' + arc.centroid(dataObj) + ')rotate(' + SurveyResults.angle(dataObj) + ')';
   })
   .style('fill', 'White')
   .style('font', 'bold 12px Arial');
 };
 
-Sumo.plotAll = function (answerData) {
-  var data = Sumo.prepareData(answerData);
+SurveyResults.plotAll = function (answerData) {
+  var data = SurveyResults.prepareData(answerData);
   var item;
 
   for (item in data) {
     if (data.hasOwnProperty(item)) {
-      Sumo.plot(item, data[item]);
+      SurveyResults.plot(item, data[item]);
     }
   }
 };
 
-Sumo.angle = function (d) {
+SurveyResults.angle = function (d) {
   var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
   return a > 90 ? a - 180 : a;
 };
