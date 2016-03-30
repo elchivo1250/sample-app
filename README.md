@@ -1,5 +1,7 @@
 # Sample Node Application 
 
+This is very much a work in progress. I haven't had much time to spend on UI/UX, but it's on my list of things to do. If you'd like to see anything specific polished or implemented, please contact me.
+
 ### Installation instructions
 
 clone the repository using
